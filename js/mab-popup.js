@@ -14,29 +14,28 @@ $( document ).ready(function(){
       }, 1000);
     }
     var targetAnimationOut = function(){
-      $(""+targetId+"").removeClass("animated");
-      $(""+targetId+"").addClass(""+AnimationOut+"");
-      $(""+targetId+"").addClass("animated");
-      $(".darkOverlay").fadeOut();
       setTimeout(function(){
         $(""+targetId+"").removeClass(""+AnimationOut+"");
         $(""+targetId+"").css("display", "none");
       }, 1000);
+      $(""+targetId+"").removeClass("animated");
+      $(""+targetId+"").addClass(""+AnimationOut+"");
+      $(""+targetId+"").addClass("animated");
+      $(".darkOverlay").fadeOut(1000);
     }
     if($(""+targetId+"").is(':hidden')){
       if($(""+targetId+"").hasClass("darkOverlayOn")){
-        $(".darkOverlay").fadeIn();
+        $(".darkOverlay").fadeIn(500);
       }
       if($(this).filter("[data-pop-animation]")){
         targetAnimationIn();
       }
-      $(""+targetId+"").fadeIn();
+      $(""+targetId+"").show();
     }else{
       if($(this).attr("data-pop-out")){
         if($(this).filter("[data-pop-animation-out]")){
           targetAnimationOut();
         }
-        $(""+targetId+"").fadeOut();
       }
     }
     $(".darkOverlay").on("click", function(){

@@ -62,5 +62,9 @@ button, .button, .btn
   border-radius: $global-radius
   transition: background-color 0.2s ease-in-out
   display: block
+  font-weight: bold
+  text-shadow: 0 0 1px darken($accent, 10%), 0 0 5px $accent
   &:hover
     background-color: lighten($accent, 10%)
+  &:focus
+    outline: none
