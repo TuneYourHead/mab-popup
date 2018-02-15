@@ -14,6 +14,7 @@ $( document ).ready(function(){
       $(""+targetId+"").removeClass("animated");
       $(""+targetId+"").addClass(""+AnimationIn+"");
       $(""+targetId+"").addClass("animated");
+      $(""+targetId+"").css("display", "block");
       setTimeout(function(){
         $(""+targetId+"").removeClass(""+AnimationIn+"");
       }, 1000);
@@ -48,6 +49,6 @@ $( document ).ready(function(){
     $(".darkOverlay").on("click", function(){
       targetAnimationOut();
     });
-    
+
   });
 })
