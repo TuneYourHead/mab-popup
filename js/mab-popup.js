@@ -1,54 +1,63 @@
 $( document ).ready(function(){
-
+  //add hidden overlay for future use
   $("body").prepend("<div class='darkOverlay' style='display: none'></div>");
-  var actionButton = $('button').filter("[data-pop]");
+  //all of the buttons to show/hide the modal
+  var actionButton = $('.actionButton');
 
   actionButton.on("click", function(){
 
     var currentActionButton = $(this);
-    var targetId = '#' + ($(this).attr("data-pop"));
-    var AnimationIn = ($(""+targetId+"").attr("data-pop-animation"));
-    var AnimationOut = ($(""+targetId+"").attr("data-pop-animation-out"));
+    var targetModal = $("" + '#' + (currentActionButton.attr("data-modal")) + "");
+    var AnimationIn = targetModal.attr("data-modal-animation");
+    var AnimationOut = (targetModal.attr("data-modal-animation-out"));
 
     var targetAnimationIn = function(){
-      $(""+targetId+"").removeClass("animated");
-      $(""+targetId+"").addClass(""+AnimationIn+"");
-      $(""+targetId+"").addClass("animated");
-      $(""+targetId+"").css("display", "block");
+      targetModal.removeClass("animated");
+      targetModal.addClass(AnimationIn);
+      targetModal.css('display', 'block');
+      targetModal.addClass("animated");
       setTimeout(function(){
-        $(""+targetId+"").removeClass(""+AnimationIn+"");
+        targetModal.removeClass(AnimationIn);
       }, 1000);
-    }
+    };
 
     var targetAnimationOut = function(){
-      $(""+targetId+"").removeClass("animated");
-      $(""+targetId+"").addClass(""+AnimationOut+"");
-      $(""+targetId+"").addClass("animated");
-      $(".darkOverlay").fadeOut(1000);
+      targetModal.removeClass("animated");
+      targetModal.addClass(AnimationOut);
+      targetModal.addClass("animated");
+      $(".darkOverlay").fadeOut();
       setTimeout(function(){
-        $(""+targetId+"").removeClass(""+AnimationOut+"");
-        $(""+targetId+"").css("display", "none");
+        targetModal.removeClass(AnimationOut);
+        targetModal.css("display", "none");
       }, 1000);
-    }
+    };
 
-    if($(""+targetId+"").is(':hidden')){
-      if($(""+targetId+"").hasClass("darkOverlayOn")){
-        $(".darkOverlay").fadeIn(500);
-      }
-      if($(this).filter("[data-pop-animation]")){
+    if(targetModal.is(':hidden')){
+
+      if(targetModal.hasClass("darkOverlayOn")){
+        $(".darkOverlay").fadeIn();
+      };
+
+      if(AnimationIn){
         targetAnimationIn();
-      }
+      }else{
+        targetModal.fadeIn();
+      };
+
     }else{
-      if($(this).attr("data-pop-out")){
-        if($(this).filter("[data-pop-animation-out]")){
+
+      if(currentActionButton.attr("data-modal-out")){
+        if(AnimationOut){
           targetAnimationOut();
+        }else{
+          targetModal.fadeOut();
         }
-      }
-    }
+      };
+
+    };
 
     $(".darkOverlay").on("click", function(){
       targetAnimationOut();
     });
-
   });
 })
